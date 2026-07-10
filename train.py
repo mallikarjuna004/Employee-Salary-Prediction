@@ -285,15 +285,14 @@ preprocessor = ColumnTransformer(
 # =====================================================
 
 model = RandomForestClassifier(
-
-    n_estimators=300,
-
+    n_estimators=50,
+    max_depth=15,
+    min_samples_split=10,
+    min_samples_leaf=4,
+    max_features="sqrt",
     random_state=42,
-
     class_weight="balanced",
-
     n_jobs=-1
-
 )
 
 pipeline = Pipeline(
@@ -421,11 +420,9 @@ print(
 # =====================================================
 
 joblib.dump(
-
     pipeline,
-
-    MODEL_PATH
-
+    MODEL_PATH,
+    compress=3
 )
 
 print("\nModel Saved Successfully")
